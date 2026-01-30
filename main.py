@@ -1,6 +1,6 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.chrome.options import Options #to be trusted by the website
 
 
 chrome_options = Options()
@@ -26,13 +26,18 @@ driver.get("https://www.python.org/")
 dates = driver.find_elements(By.CSS_SELECTOR,".event-widget .shrubbery .menu time")
 names = driver.find_elements(By.CSS_SELECTOR,".event-widget .shrubbery .menu a")
 
+
+
 for date,value in enumerate(dates):  
     key = str(date)
     values= {'text':value.text}
     Events[key] = values
 
 
-
+for i, name in enumerate(names):
+    index = str(i)
+    name_val = {'name':name.text}
+    Events[index].update(name_val)
 print(Events)
 driver.quit()
 
